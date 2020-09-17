@@ -12,67 +12,63 @@
 // * Gather user input with prompt's and confirm's
 
 function generatePassword(){
-  var passwordLength = prompt("How long password length do you need?");
-  var isSpecialChar = confirm("Do you want to add Special Charactors?");
-  var isUpperCase = confirm("Do you want to add Upper Case letters?");
-  var isLowerCase = confirm("Do you want to add Lower Case letters?");
-  var numPassWord ="";
-  var specialCharPassWord ="";
-  var upperCasePassWord ="";
-  var lowerCasePassWord ="";
-  var totalPassWord = "";
-  var shuffledPassWord ="";
+  var passwordLength = prompt("How long password length do you need? (Range 8 to 128)");
+
+  if(passwordLength < 8){
+    alert("Enter at least 8");
+    exit;
+  }
+
+  if(passwordLength > 128){
+    alert("Enter less than 129");
+    exit;
+  }
+
+  var passWord = "";
+  var isNumeric = confirm("Do you want to use Numeric with?");
+  var isSpecialChar = confirm("Do you want to use Special Charactors with?");
+  var isUpperCase = confirm("Do you want to use Upper Case letters with?");
+  var isLowerCase = confirm("Do you want to use Lower Case letters with?");
   
-  for (let i = 0; i < passwordLength; i++){
-        numPassWord += Math.round(Math.random() * 9) + 1;
+  var totalLetters = "";
+  var numeric = "1234567890";
+  var specialChar = "!@#$%^&*()";
+  var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+  
+  if(isNumeric){
+    totalLetters += numeric;
   }
 
   if(isSpecialChar){
-    for (let i = 0; i < passwordLength; i++){
-      specialCharPassWord += String.fromCharCode(Math.round(Math.random() * 14) + 33);  // from 33 to 47
-    }
+    totalLetters += specialChar;
   }
 
   if(isUpperCase){
-    for (let i = 0; i < passwordLength; i++){
-      upperCasePassWord += String.fromCharCode(Math.round(Math.random() * 25) + 65);  // from 65 to 90
-    }
+    totalLetters += upperCase;
   }
 
   if(isLowerCase){
-    for (let i = 0; i < passwordLength; i++){
-      lowerCasePassWord += String.fromCharCode(Math.round(Math.random() * 25) + 97);  // from 97 to 132
-    }
+    totalLetters += lowerCase;
   }
 
-  // Add to totalPassword
-  totalPassWord = numPassWord + lowerCasePassWord + upperCasePassWord + specialCharPassWord;
-  
-  //Debug - checking totalPassword.length
-  console.log("Length: " + totalPassWord.length);
+  if(totalLetters === ""){
+    alert("You should choose one of types.");
+    exit;
+  }
 
-  // Shuffle 
-  var iteratorAmount = 1;
-  if(isSpecialChar || isUpperCase || isLowerCase){
-    iteratorAmount = 2;
-  }
-  if((isSpecialChar && isUpperCase) || (isSpecialChar && isLowerCase) || (isUpperCase && isLowerCase) ){
-    iteratorAmount = 3;
-  }
-  if(isSpecialChar && isUpperCase && isLowerCase){
-    iteratorAmount = 4;
-  }
-  
-  //Debug - checking iteratorAmount
-  console.log("iteratorAmount : " + iteratorAmount);
+  //Debugging - Letter Legnth
+  console.log("Letter Length : " + totalLetters.length);
 
   for (let i = 0; i < passwordLength; i++){
-    shuffledPassWord += totalPassWord[Math.round(Math.random() * (passwordLength * iteratorAmount))];
-    
-    //Debug - checking index number
-    console.log("Random index: "+ Math.round(Math.random() * (passwordLength * iteratorAmount)));
+    let index = Math.floor(Math.random() * totalLetters.length);
+    passWord += totalLetters.charAt(index);
+
+    //Debugging - Display index
+    console.log("Index : " +index);
   }
-  return shuffledPassWord;
+
+  return passWord;
 }
 
 
