@@ -60,6 +60,7 @@ function generatePassword(){
   //Debugging - Letter Legnth
   console.log("Letter Length : " + totalLetters.length);
 
+  // Selecting Password as the length that a user wants.
   for (let i = 0; i < passwordLength; i++){
     let index = Math.floor(Math.random() * totalLetters.length);
     passWord += totalLetters.charAt(index);
