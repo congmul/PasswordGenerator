@@ -14,17 +14,18 @@
 function generatePassword(){
   // Prompt a user to choose a length of the password.
   var passwordLength = prompt("How long password length do you need? (Range 8 to 128)");
+  console.log(typeof passwordLength);
 
   // Checking the length of the password is more than 8.
   if(passwordLength < 8){
     alert("Enter at least 8");
-    exit;
+    return generatePassword();
   }
 
   // Checking the length of the password is less than 128.
   if(passwordLength > 128){
     alert("Enter less than 129");
-    exit;
+    return generatePassword();
   }
 
   // Declaring Variables
