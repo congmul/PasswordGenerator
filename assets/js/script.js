@@ -12,46 +12,56 @@
 // * Gather user input with prompt's and confirm's
 
 function generatePassword(){
+  // Prompt a user to choose a length of the password.
   var passwordLength = prompt("How long password length do you need? (Range 8 to 128)");
 
+  // Checking the length of the password is more than 8.
   if(passwordLength < 8){
     alert("Enter at least 8");
     exit;
   }
 
+  // Checking the length of the password is less than 128.
   if(passwordLength > 128){
     alert("Enter less than 129");
     exit;
   }
 
+  // Declaring Variables
   var passWord = "";
-  var isNumeric = confirm("Do you want to use Numeric with?");
-  var isSpecialChar = confirm("Do you want to use Special Charactors with?");
-  var isUpperCase = confirm("Do you want to use Upper Case letters with?");
-  var isLowerCase = confirm("Do you want to use Lower Case letters with?");
-  
   var totalLetters = "";
   var numeric = "1234567890";
   var specialChar = "!@#$%^&*()";
   var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+
+  // Selecting criteria to include in the password.
+  var isNumeric = confirm("Do you want to use Numeric with?");
+  var isSpecialChar = confirm("Do you want to use Special Charactors with?");
+  var isUpperCase = confirm("Do you want to use Upper Case letters with?");
+  var isLowerCase = confirm("Do you want to use Lower Case letters with?");
   
+  // Adding Numeric to the password
   if(isNumeric){
     totalLetters += numeric;
   }
 
+  // Adding Special Charactor to the password
   if(isSpecialChar){
     totalLetters += specialChar;
   }
 
+  // Adding uppercases to the password
   if(isUpperCase){
     totalLetters += upperCase;
   }
 
+  // Adding lowercases to the password
   if(isLowerCase){
     totalLetters += lowerCase;
   }
 
+  // Checking if a user chooses one of the criteria at least. 
   if(totalLetters === ""){
     alert("You should choose one of types.");
     exit;
@@ -69,6 +79,7 @@ function generatePassword(){
     console.log("Index : " +index);
   }
 
+  // Return final password 
   return passWord;
 }
 
